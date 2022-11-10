@@ -49,7 +49,7 @@ class Parser:
                 if word == "include" and not self.IsInString(word, line):
                     includeName = words[wordNo + 1]
                     code = code.replace(line, "")
-                    with open(includeName.removesuffix(";") + ".cokkie", "r") as file:
+                    with open(includeName.removesuffix(";") + ".B", "r") as file:
                         code = file.read() + "\n" + code
         for line in code.splitlines():
             if "from native reference " in line:
@@ -82,8 +82,8 @@ class Parser:
             if "False" in line and not self.IsInString("False", line):
                 code = code.replace(line, line.replace("False", "False"))
         for line in code.splitlines():
-            if "null" in line and not self.IsInString("null", line):
-                code = code.replace(line, line.replace("null", "None"))
+            if "None" in line and not self.IsInString("None", line):
+                code = code.replace(line, line.replace("None", "None"))
         for line in code.splitlines():
             if "else if" in line and not self.IsInString("else if", line):
                 code = code.replace(line, line.replace("else if", "elif"))
